@@ -1,0 +1,36 @@
+server:
+  port: 8004
+spring:
+  # 服务逻辑名称
+  application:
+    name: readingBook
+  profiles:
+    active: dev
+  datasource:
+    book-center:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/reading_cloud_resource?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: jiangshao888
+      initial-size: 5
+      min-idle: 5
+      max-active: 30
+      max-wait: 6000
+      test-while-idle: true
+      validation-query: 'select 1 from dual'
+      connect-timeout: 1500
+  cloud:
+    nacos:
+      # 配置中心
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        refresh: true
+        #         shared-dataids: readingBook.yaml
+        namespace: 4d109a4d-f34d-4e86-9e39-c2d36db24b00
+        enabled: true
+
+      # 注册中心
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 4d109a4d-f34d-4e86-9e39-c2d36db24b00
